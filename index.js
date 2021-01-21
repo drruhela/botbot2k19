@@ -44,7 +44,7 @@ bot.on('message', msg => { //commands in alphabetical order
 			cmdsList += cmds[i] + '\n'
 		}
 		msg.channel.send(title);
-		msg.channel.send('``` '+ cmdsList + '```');
+		msg.channel.send('```'+ cmdsList + '```');
 	}
 
 	else if (msg.content === '!dev') {
