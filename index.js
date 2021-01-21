@@ -3,6 +3,8 @@ const bot = new Discord.Client();
 //const TOKEN = process.env.BOT_TOKEN;
 const TOKEN = "Nzk0NzEyMjkwMTU4NzA2Njg5.X--zfw.5N8gNPDDJXLsHERFa6U81takVHI"
 
+var cmds = ['alien, !alien', 'blob, !blob', 'boogie, !boogie', '!broken', '!dev', 'kappa', '!leab']
+
 bot.login(TOKEN);
 
 bot.on('ready', () => {
@@ -31,6 +33,20 @@ bot.on('message', msg => { //commands in alphabetical order
 
 	else if (msg.content === '!broken') {
 		msg.channel.send('heart :heart: been broke :broken_heart: so many times :alarm_clock: i i don’t :woman_shrugging: know what to believe :thought_balloon: yeah :thumbsup: mama :woman: said it’s my fault :thumbsdown:');
+	}
+
+	else if (msg.content === '!cmds') {
+
+		var cmdsList = '';
+		var message = 'List of commands for botbot2k19: \n\n';
+
+		for (var i = 0; i < cmds.length; i++) {
+			cmdsList += cmds[i] + '\n'
+		}
+
+		message += cmdsList;
+
+		msg.channel.send('``` \n' + message + '\n ```');
 	}
 
 	else if (msg.content === '!dev') {
