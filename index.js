@@ -29,6 +29,14 @@ bot.on('message', msg => { //commands in alphabetical order
 
 	}
 
+	else if (msg.content === '!broken') {
+		msg.channel.send('heart :heart: been broke :broken_heart: so many times :alarm_clock: i i don’t :woman_shrugging: know what to believe :thought_balloon: yeah :thumbsup: mama :woman: said it’s my fault :thumbsdown:');
+	}
+
+	else if (msg.content === '!dev') {
+		msg.channel.send(' the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>')
+	}
+
 	else if (msg.content === 'kappa') {
 		msg.channel.send('<:kappa:743846227619217523>')
 	}
@@ -37,7 +45,4 @@ bot.on('message', msg => { //commands in alphabetical order
 		msg.channel.send('gtfo')
 	}
 
-	else if (msg.content === '!dev') {
-		msg.channel.send(' the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>')
-	}
 });
