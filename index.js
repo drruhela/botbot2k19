@@ -38,7 +38,7 @@ bot.on('message', msg => { //commands in alphabetical order
 	else if (msg.content === '!cmds') {
 
 		var cmdsList = '';
-		var message = 'List of commands for botbot2k19: \n\n';
+		var message = '**List of commands for botbot2k19: **\n\n';
 
 		for (var i = 0; i < cmds.length; i++) {
 			cmdsList += cmds[i] + '\n'
@@ -46,7 +46,7 @@ bot.on('message', msg => { //commands in alphabetical order
 
 		message += cmdsList;
 
-		msg.channel.send('``` \n' + message + '\n ```');
+		msg.channel.send('``` '+ message + '```');
 	}
 
 	else if (msg.content === '!dev') {
