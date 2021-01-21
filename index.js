@@ -38,15 +38,13 @@ bot.on('message', msg => { //commands in alphabetical order
 	else if (msg.content === '!cmds') {
 
 		var cmdsList = '';
-		var message = '**List of commands for botbot2k19: **\n\n';
+		var title = '__**List of commands for botbot2k19: **__ \n';
 
 		for (var i = 0; i < cmds.length; i++) {
 			cmdsList += cmds[i] + '\n'
 		}
 
-		message += cmdsList;
-
-		msg.channel.send('``` '+ message + '```');
+		msg.channel.send(title + '``` '+ message + '```');
 	}
 
 	else if (msg.content === '!dev') {
