@@ -57,7 +57,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 	else if (messageLower === '!drew') {
 
-		message.chcannel.send('Sister Drew :heart:');
+		message.channel.send('Sister Drew :heart:');
 
 	}
 
