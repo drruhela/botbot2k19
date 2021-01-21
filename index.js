@@ -11,31 +11,39 @@ bot.on('ready', () => {
 	console.info(`Logged in as ${bot.user.tag}!`);
 });
 
-bot.on('message', msg => { //commands in alphabetical order
+bot.on('message', message => { //commands in alphabetical order
 
-	if (msg.content === 'alien' || msg.content === '!alien') {
+	let msg = message.content.toLowerCase();
+
+	if (msg.includes('alien') || msg === '!alien') {
 	  	
-	    msg.channel.send('<a:alienpls:801563358997512232>');
+	    message.channel.send('<a:alienpls:801563358997512232>');
 
 	}
 
-	else if (msg.content === 'blob' || msg.content === '!blob') {
+	if (msg.includes('awk') || msg === '!awk') {
 	  	
-	    msg.channel.send('<a:blob:743847987150848080>');
+	    message.channel.send('<:awk:801684378353664061>');
+
+	}
+
+	else if (msg.includes('blob') || msg === '!blob') {
+	  	
+	    message.channel.send('<a:blob:743847987150848080>');
 
 	} 
 
-	else if (msg.content === 'boogie' || msg.content === '!boogie') {
+	else if (msg.includes('boogie') || msg === '!boogie') {
 	  	
-	    msg.channel.send('<a:boogie:799348432962846720>');
+	    message.channel.send('<a:boogie:799348432962846720>');
 
 	}
 
-	else if (msg.content === '!broken') {
-		msg.channel.send('heart :heart: been broke :broken_heart: so many times :alarm_clock: i i don’t :woman_shrugging: know what to believe :thought_balloon: yeah :thumbsup: mama :woman: said it’s my fault :thumbsdown:');
+	else if (msg === '!broken') {
+		message.channel.send('heart :heart: been broke :broken_heart: so many times :alarm_clock: i i don’t :woman_shrugging: know what to believe :thought_balloon: yeah :thumbsup: mama :woman: said it’s my fault :thumbsdown:');
 	}
 
-	else if (msg.content === '!cmds') {
+	else if (msg === '!cmds') {
 
 		var cmdsList = '';
 		var title = '__**List of commands for botbot2k19: **__';
@@ -43,20 +51,24 @@ bot.on('message', msg => { //commands in alphabetical order
 		for (var i = 0; i < cmds.length; i++) {
 			cmdsList += cmds[i] + '\n'
 		}
-		msg.channel.send(title);
-		msg.channel.send('```'+ cmdsList + '```');
+		message.channel.send(title);
+		message.channel.send('```'+ cmdsList + '```');
 	}
 
-	else if (msg.content === '!dev') {
-		msg.channel.send(' the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>')
+	else if (msg === '!dev') {
+		message.channel.send('the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>')
 	}
 
-	else if (msg.content === 'kappa') {
-		msg.channel.send('<:kappa:743846227619217523>')
+	else if (msg === '!drew') {
+		message.channel.send('Sister Drew :heart:')
 	}
 
-	else if (msg.content === 'leab' || msg.content === '!leab') {
-		msg.channel.send('gtfo')
+	else if (msg.includes('kappa')) {
+		message.channel.send('<:kappa:743846227619217523>')
+	}
+
+	else if (msg.includes('leab') || msg === '!leab') {
+		message.channel.send('gtfo')
 	}
 
 });
