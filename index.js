@@ -13,37 +13,31 @@ bot.on('ready', () => {
 
 bot.on('message', message => { //commands in alphabetical order
 
-	let msg = message.content.toLowerCase();
+	let messageLower = message.content.toLowerCase();
 
-	if (msg.includes('alien') || msg === '!alien') {
+	if (messageLower === 'alien' || messageLower === '!alien') {
 	  	
 	    message.channel.send('<a:alienpls:801563358997512232>');
 
 	}
 
-	if (msg.includes('awk') || msg === '!awk') {
-	  	
-	    message.channel.send('<:awk:801684378353664061>');
-
-	}
-
-	else if (msg.includes('blob') || msg === '!blob') {
+	else if (messageLower === 'blob' || messageLower === '!blob') {
 	  	
 	    message.channel.send('<a:blob:743847987150848080>');
 
 	} 
 
-	else if (msg.includes('boogie') || msg === '!boogie') {
+	else if (messageLower === 'boogie' || messageLower === '!boogie') {
 	  	
 	    message.channel.send('<a:boogie:799348432962846720>');
 
 	}
 
-	else if (msg === '!broken') {
+	else if (messageLower === '!broken') {
 		message.channel.send('heart :heart: been broke :broken_heart: so many times :alarm_clock: i i don’t :woman_shrugging: know what to believe :thought_balloon: yeah :thumbsup: mama :woman: said it’s my fault :thumbsdown:');
 	}
 
-	else if (msg === '!cmds') {
+	else if (messageLower === '!cmds') {
 
 		var cmdsList = '';
 		var title = '__**List of commands for botbot2k19: **__';
@@ -55,20 +49,24 @@ bot.on('message', message => { //commands in alphabetical order
 		message.channel.send('```'+ cmdsList + '```');
 	}
 
-	else if (msg === '!dev') {
-		message.channel.send('the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>')
+	else if (messageLower === '!dev') {
+
+		message.channel.send(' the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>');
+
 	}
 
-	else if (msg === '!drew') {
-		message.channel.send('Sister Drew :heart:')
+	else if (messageLower === '!drew') {
+
+		message.chcannel.send('Sister Drew :heart:');
+
 	}
 
-	else if (msg.includes('kappa')) {
-		message.channel.send('<:kappa:743846227619217523>')
+	else if (messageLower === 'kappa') {
+		message.channel.send('<:kappa:743846227619217523>');
 	}
 
-	else if (msg.includes('leab') || msg === '!leab') {
-		message.channel.send('gtfo')
+	else if (messageLower === 'leab' || messageLower === '!leab') {
+		message.channel.send('gtfo');
 	}
 
 });
