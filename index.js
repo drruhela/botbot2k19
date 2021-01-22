@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 //const TOKEN = process.env.BOT_TOKEN;
 const TOKEN = "Nzk0NzEyMjkwMTU4NzA2Njg5.X--zfw.5N8gNPDDJXLsHERFa6U81takVHI"
 
-var cmds = ['alien, !alien', 'blob, !blob', 'boogie, !boogie', '!broken', '!dev', 'kappa', '!leab']
+var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boogie, !boogie', '!broken', '!dev', 'kappa', '!leab']
 
 bot.login(TOKEN);
 
@@ -19,6 +19,11 @@ bot.on('message', message => { //commands in alphabetical order
 	  	
 	    message.channel.send('<a:alienpls:801563358997512232>');
 
+	}
+
+	else if (messageLower === 'awk') {
+
+		message.channel.send('<:awk:801684378353664061>');
 	}
 
 	else if (messageLower === 'blob' || messageLower === '!blob') {
@@ -58,12 +63,6 @@ bot.on('message', message => { //commands in alphabetical order
 	else if (messageLower === '!dev') {
 
 		message.channel.send(' the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>');
-
-	}
-
-	else if (messageLower === '!drew') {
-
-		message.channel.send('Sister Drew :heart:');
 
 	}
 
