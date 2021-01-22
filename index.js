@@ -25,7 +25,13 @@ bot.on('message', message => { //commands in alphabetical order
 	  	
 	    message.channel.send('<a:blob:743847987150848080>');
 
-	} 
+	}
+
+	else if (messageLower === 'blobtrain' || messageLower === '!blobtrain') {
+		for (var i = 0; i < 10; i++) {
+			message.channel.send('<a:blob:743847987150848080>');
+		}
+	}
 
 	else if (messageLower === 'boogie' || messageLower === '!boogie') {
 	  	
