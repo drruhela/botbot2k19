@@ -62,8 +62,12 @@ bot.on('message', message => { //commands in alphabetical order
 
 	else if (messageLower === '!dev') {
 
-		message.channel.send(' the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>');
+		message.channel.send('the most awesoem person to ever live on this planet <:hypers:801579010668757042> <:Kappa:743846227619217523>');
 
+	}
+
+	else if (messageLower === '!drew') {
+		message.channel.send('Sister Drew :heart:')
 	}
 
 	else if (messageLower === 'kappa') {
