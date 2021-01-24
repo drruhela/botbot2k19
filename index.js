@@ -70,6 +70,10 @@ bot.on('message', message => { //commands in alphabetical order
 		message.channel.send('Sister Drew :heart:')
 	}
 
+	else if(messageLower === '!freq' || messageLower === '!john') {
+		message.channel.send('Best mod worldwide <:hypers:801579010668757042>')
+	}
+
 	else if (messageLower === '!imaani') {
 		message.channel.send("Dev's Everything <:love:746027756525060199>");
 	}
@@ -100,8 +104,6 @@ bot.on('message', message => { //commands in alphabetical order
 	else if (messageLower === 'ppjedi' || messageLower === '!ppjedi') {
 		message.channel.send('<a:ppJedi:802762707752189992>');
 	}
-
-	
 
 	else if (messageLower === '!queen') {
 		message.channel.send('Brother Queen <:CarlSmile:775435711876300861>');
