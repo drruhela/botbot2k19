@@ -87,7 +87,7 @@ bot.on('message', message => { //commands in alphabetical order
 	}
 
 	else if (messageLower === '!popo') {
-		message.channel.send("Smarb but stoopid <:p_:763179797110849557>");
+		message.channel.send("Smarb but stoopid <:p_:763179797110849557> <:love:746027756525060199>");
 	}
 
 	else if (messageLower === '!pp') {
@@ -107,6 +107,10 @@ bot.on('message', message => { //commands in alphabetical order
 
 	else if (messageLower === '!queen') {
 		message.channel.send('Brother Queen <:CarlSmile:775435711876300861>');
+	}
+
+	else if (messageLower === '!vinny') {
+		message.channel.send('<:botalert:802769299072614460> <:p_:763179797110849557>')
 	}
 
 });
