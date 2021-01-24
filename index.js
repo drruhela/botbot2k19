@@ -82,13 +82,22 @@ bot.on('message', message => { //commands in alphabetical order
 		message.channel.send('gtfo');
 	}
 
-	else if (messageLower === 'ppJedi' || messageLower === '!ppJedi') {
-		message.channel.send('<a:ppJedi:802762707752189992>');
+	else if (messageLower === '!pp') {
+
+		for (var i = 0; i < 5; i++) {
+			message.channel.send('<a:ppJedi:802762707752189992> <a:ppHop:802763193972949022> ');
+		}
 	}
 
 	else if (messageLower === 'ppHop' || messageLower === '!ppHop') {
 		message.channel.send('<a:ppHop:802763193972949022>');
 	}
+
+	else if (messageLower === 'ppJedi' || messageLower === '!ppJedi') {
+		message.channel.send('<a:ppJedi:802762707752189992>');
+	}
+
+	
 
 	else if (messageLower === '!queen') {
 		message.channel.send('Brother Queen <:CarlSmile:775435711876300861>');
