@@ -89,11 +89,11 @@ bot.on('message', message => { //commands in alphabetical order
 		}
 	}
 
-	else if (messageLower === 'ppHop' || messageLower === '!ppHop') {
+	else if (messageLower === 'pphop' || messageLower === '!pphop') {
 		message.channel.send('<a:ppHop:802763193972949022>');
 	}
 
-	else if (messageLower === 'ppJedi' || messageLower === '!ppJedi') {
+	else if (messageLower === 'ppjedi' || messageLower === '!ppjedi') {
 		message.channel.send('<a:ppJedi:802762707752189992>');
 	}
 
