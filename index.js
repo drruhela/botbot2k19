@@ -71,7 +71,7 @@ bot.on('message', message => { //commands in alphabetical order
 	}
 
 	else if (messageLower === '!imaani') {
-		message.channel.send("Dev's Everything <:devdev2Love:750418834288017448>");
+		message.channel.send("Dev's Everything <:love:746027756525060199>");
 	}
 
 	else if (messageLower === 'kappa') {
@@ -80,6 +80,10 @@ bot.on('message', message => { //commands in alphabetical order
 
 	else if (messageLower === 'leab' || messageLower === '!leab') {
 		message.channel.send('gtfo');
+	}
+
+	else if (messageLower === '!popo') {
+		message.channel.send("Smarb but stoopid <:p_:763179797110849557>");
 	}
 
 	else if (messageLower === '!pp') {
