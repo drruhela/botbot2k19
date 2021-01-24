@@ -70,12 +70,28 @@ bot.on('message', message => { //commands in alphabetical order
 		message.channel.send('Sister Drew :heart:')
 	}
 
+	else if (messageLower === '!imaani') {
+		message.channel.send("Dev's Everything <:devdev2Love:750418834288017448>");
+	}
+
 	else if (messageLower === 'kappa') {
 		message.channel.send('<:kappa:743846227619217523>');
 	}
 
 	else if (messageLower === 'leab' || messageLower === '!leab') {
 		message.channel.send('gtfo');
+	}
+
+	else if (messageLower === 'ppJedi' || messageLower === '!ppJedi') {
+		message.channel.send('<a:ppJedi:802762707752189992>');
+	}
+
+	else if (messageLower === 'ppHop' || messageLower === '!ppHop') {
+		message.channel.send('<a:ppHop:802763193972949022>');
+	}
+
+	else if (messageLower === '!queen') {
+		message.channel.send('Brother Queen <:CarlSmile:775435711876300861>');
 	}
 
 });
