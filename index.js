@@ -15,6 +15,10 @@ bot.on('message', message => { //commands in alphabetical order
 
 	let messageLower = message.content.toLowerCase();
 
+	if (messageLower === '!ale') {
+		message.channel.send('Pickle <:Pickle:699511064651497542>')
+	}
+
 	if (messageLower === 'alien' || messageLower === '!alien') {
 	  	
 	    message.channel.send('<a:alienpls:801563358997512232>');
