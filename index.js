@@ -231,7 +231,14 @@ bot.on('message', message => { //commands in alphabetical order
 				var padlength = 40;
 
 				for (var i = 0; i < results.length; i++) {
-					cmdsList += results[i].name + ((padlength-results[i].name.length) * " ") + results[i].text + "\n";
+
+					var pad = "";
+
+					for (var j = padlength; j > results[i].name.length; j--) {
+						pad += " ";
+					}
+
+					cmdsList += results[i].name + pad + results[i].text + "\n";
 				}
 
 				message.channel.send(title);
