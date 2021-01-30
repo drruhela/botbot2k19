@@ -213,7 +213,57 @@ bot.on('message', message => { //commands in alphabetical order
 
 	}
 
+	//help command
 
+	else if (messageLower === '!help') {
+
+		var title = "__**Help Commands**__";
+
+		var modCommands = [
+			{'!addcom' : 'To add a new command.' },
+			{'!editcom' : 'To edit an existing command.'},
+			{'!delcom' : 'To delete an existing command.'}
+		]
+
+		var modCommands = [
+			{
+				name : '!addcom',
+				text : 'To add a new command.'
+			},
+			{
+				name : '!editcom',
+				text : 'To edit an existing command.'
+			},
+			{
+				name : '!delcom',
+				text : 'To delete an existing command.'
+			}
+		];
+
+		var note = "You can't delete the blobtrain or !pp commands because they're awesome :)";
+
+		var padlength = 30;
+
+		var cmdsList = "";
+
+		for (var i = 0; i < modCommands.length; i++) {
+
+			var pad = "";
+
+			for (var j = padlength; j > modCommands[i].name.length; j--) {
+				pad += " ";
+			}
+
+			var cmdCount = (i + 1) + ". ";
+			cmdsList += cmdCount + modCommands[i].name + pad + modCommands[i].text + "\n";
+		}
+
+		message.channel.send(title);
+		message.channel.send("```"+ cmdsList + "```");
+
+	}
+
+	
 	//animated emotes
 
 	else if (messageLower === 'blobtrain' || messageLower === '!blobtrain') {
