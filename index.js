@@ -18,8 +18,12 @@ const db = new MongoClient(uri, { useNewUrlParser: true });
 
 db.connect(err => {
 	var cmdDB = db.db("commands");
-	cmdDB.servers.drop();
-	console.log("Servers collection deleted.");
+	
+	cmdDB.collection("servers").drop(function(err, delOK) {
+	    if (err) throw err;
+	    if (delOK) console.log("Collection deleted");
+	    db.close();
+	});
 
 	cmdDB.createCollection("cmds", function(err, res) {
 	    if (err) throw err;
