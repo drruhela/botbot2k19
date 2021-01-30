@@ -58,7 +58,7 @@ bot.on('message', message => { //commands in alphabetical order
 	let messageLower = message.content.toLowerCase();
 
 
-	if (messageLower.startsWith('!addcom ')) {
+	if (messageLower.startsWith('!addcom')) {
 
 		var addcmd = message.content;
 		message.channel.send("message: " + addcmd);
@@ -86,7 +86,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
 			    	if (err) throw err;
-			    	if (results.length > 0) {
+			    	if (result.length > 0) {
 			    		console.log("command already exists");
 			    	}
 			    	db.close();
