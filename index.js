@@ -121,6 +121,8 @@ bot.on('message', message => { //commands in alphabetical order
 
 	let messageLower = message.content.toLowerCase();
 
+	/*
+
 	if (messageLower.startsWith('!addcom')) {
 
 		var addcmd = message.content;
@@ -134,7 +136,7 @@ bot.on('message', message => { //commands in alphabetical order
 			message.channel.send("Add a command by typing: !addcom [commandName] [Text]");
 
 		} else {
-			/*
+			
 			var server = message.guild.id + "";
 			var cmdFilePath = "commands/" + server + ".csv";
 
@@ -165,10 +167,11 @@ bot.on('message', message => { //commands in alphabetical order
 
 			message.channel.send("Command " + cmdName + " has been added to your server!")
 
-			*/
+			
 		}
 
 	}
+	*/
 
 	if (messageLower === '!ale') {
 		message.channel.send('Pickle <:Pickle:699511064651497542>')
