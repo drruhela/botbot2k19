@@ -127,15 +127,16 @@ bot.on('message', message => { //commands in alphabetical order
 
 		var addcmd = message.content;
 		message.channel.send("message: " + addcmd);
-		addcmd.split(' ');
-		message.channel.send(addcmd.length);
 
-		/*
-		for (var i = 0; i < addcmd.length; i++) {
-			message.channel.send(addcmd[1] + i);
-		}*/
+		var cmdArray = addcmd.split(' ');
+		message.channel.send(cmdArray.length);
 
-		if (addcmd.length < 2) {
+		
+		for (var i = 0; i < cmdArray.length; i++) {
+			message.channel.send(addcmd[1] + " " + i);
+		}
+
+		if (cmdArray.length < 2) {
 
 			message.channel.send("Add a command by typing: !addcom [commandName] [Text]");
 
@@ -154,11 +155,11 @@ bot.on('message', message => { //commands in alphabetical order
 			});
 
 
-			var cmdName = addcmd[1];
+			var cmdName = cmdArray[1];
 			var cmdBody = "";
 
-			for (var i = 2; i < addcmd.length; i++) {
-				cmdBody += addcmd[i] + " ";
+			for (var i = 2; i < cmdArray.length; i++) {
+				cmdBody += cmdArray[i] + " ";
 			}
 
 			const cmd = [{
