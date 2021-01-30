@@ -228,7 +228,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 			} else {
 
-				var padlength = 40;
+				var padlength = 30;
 
 				for (var i = 0; i < results.length; i++) {
 
