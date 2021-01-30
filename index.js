@@ -235,19 +235,25 @@ bot.on('message', message => { //commands in alphabetical order
 			console.log(results);
 
 			if (results.length === 0) {
+				
+				message.channel.send("There are no commands in this server. To add commands, use !addcom.")
 				console.log("no commands in this server.")
-				cmdsList += "There are no commands in this server. To add commands, use !addcom."
+				//cmdsList += "There are no commands in this server. To add commands, use !addcom."
+				
 			} else {
 
 				for (var i = 0; i < results.length; i++) {
 					cmdsList += results[i].name + "          " + results[i].text + "\n";
 				}
+
+				message.channel.send(title);
+				message.channel.send("```"+ cmdsList + "```");
+				console.log("Commands printed");
+
 			}
 		});
 
-		message.channel.send(title);
-		message.channel.send("```"+ cmdsList + "```");
-		console.log("Commands printed");
+		
 	}
 
 	else if (messageLower === '!dev') {
