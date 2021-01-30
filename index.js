@@ -200,7 +200,7 @@ bot.on('message', message => { //commands in alphabetical order
 						pad += " ";
 					}
 
-					var cmdCount = "**" + (i + 1) + "**. "
+					var cmdCount = (i + 1) + ". ";
 					cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
 				}
 
@@ -215,22 +215,6 @@ bot.on('message', message => { //commands in alphabetical order
 
 
 	//animated emotes
-	else if (messageLower === 'alien' || messageLower === '!alien') {
-	  	
-	    message.channel.send('<a:alienpls:801563358997512232>');
-
-	}
-
-	else if (messageLower === 'awk') {
-
-		message.channel.send('<:awk:801684378353664061>');
-	}
-
-	else if (messageLower === 'blob' || messageLower === '!blob') {
-	  	
-	    message.channel.send('<a:blob:743847987150848080>');
-
-	}
 
 	else if (messageLower === 'blobtrain' || messageLower === '!blobtrain') {
 		for (var i = 0; i < 10; i++) {
@@ -238,25 +222,11 @@ bot.on('message', message => { //commands in alphabetical order
 		}
 	}
 
-	else if (messageLower === 'boogie' || messageLower === '!boogie') {
-	  	
-	    message.channel.send('<a:boogie:799348432962846720>');
-
-	}
-
 	else if (messageLower === '!pp') {
 
 		for (var i = 0; i < 5; i++) {
 			message.channel.send('<a:ppJedi:802762707752189992> <a:ppHop:802763193972949022> <a:ppJedi:802762707752189992> <a:ppHop:802763193972949022>  <a:ppJedi:802762707752189992> <a:ppHop:802763193972949022> ');
 		}
-	}
-
-	else if (messageLower === 'pphop' || messageLower === '!pphop') {
-		message.channel.send('<a:ppHop:802763193972949022>');
-	}
-
-	else if (messageLower === 'ppjedi' || messageLower === '!ppjedi') {
-		message.channel.send('<a:ppJedi:802762707752189992>');
 	}
 
 	else { //read commands from database and deploy them
