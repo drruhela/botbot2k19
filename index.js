@@ -129,7 +129,7 @@ bot.on('message', message => { //commands in alphabetical order
 		addcmd.split(' ');
 
 		for (var i = 0; i < addcmd.length; i++) {
-			message.channel.send(addcmd[1]);
+			message.channel.send(addcmd[1] + i);
 		}
 		if (addcmd.length < 2) {
 
