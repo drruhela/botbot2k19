@@ -42,7 +42,8 @@ bot.on('ready', async () => {
 bot.on('message', message => { //commands in alphabetical order
 
 	let messageLower = message.content.toLowerCase();
-
+	var serverID = message.guild.id() + "";
+	var cmdsDB = mongoClient.db("commands");
 
 	if (messageLower.startsWith('!addcom')) {
 
@@ -56,16 +57,12 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 			
-			var serverID = message.guild.id + "";
 			var cmdName = cmdArray[1].toLowerCase();
 			var cmdBody = "";
 
 			for (var i = 2; i < cmdArray.length; i++) {
 				cmdBody += cmdArray[i] + " ";
 			}
-
-			var cmdsDB = mongoClient.db("commands");
-
 
 			cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, results) {
 			    if (err) throw err;
@@ -101,11 +98,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 
-			var serverID = message.guild.id + "";
 			var cmdName = cmdArray[1];
-
-			var cmdsDB = mongoClient.db("commands");
-
 
 			cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, results) {
 			    if (err) throw err;
@@ -144,16 +137,12 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 			
-			var serverID = message.guild.id + "";
 			var cmdName = cmdArray[1].toLowerCase();
 			var cmdBody = "";
 
 			for (var i = 2; i < cmdArray.length; i++) {
 				cmdBody += cmdArray[i] + " ";
 			}
-
-			var cmdsDB = mongoClient.db("commands");
-
 
 			cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, results) {
 			    if (err) throw err;
@@ -227,19 +216,16 @@ bot.on('message', message => { //commands in alphabetical order
 		var cmdsList = "";
 		var title = "__**List of commands for this server: **__";
 
-		var cmdsDB = mongoClient.db("commands");
-
-
 		cmdsDB.collection("cmds").find({server : serverID}).toArray(function(err, results) {
 			if (err) throw err;
-			console.log(results);
+			//console.log(results);
 
 			if (results.length === 0) {
 				
 				message.channel.send("There are no commands in this server. To add commands, use !addcom.")
 				console.log("no commands in this server.")
 				//cmdsList += "There are no commands in this server. To add commands, use !addcom."
-				
+
 			} else {
 
 				for (var i = 0; i < results.length; i++) {
