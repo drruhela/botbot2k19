@@ -18,15 +18,14 @@ const db = new MongoClient(uri, { useNewUrlParser: true });
 
 /*
 db.connect(err => {
-	var cmdDB = db.db("commands");
-	
-	cmdDB.createCollection("cmds", function(err, res) {
-	    if (err) throw err;
-	    console.log("Collection Cmds created!");
-	    db.close();
-	});
-
-	
+	if (err) throw err;
+  var dbo = db.db("commands");
+  var myquery = { name: 'broken' };
+  dbo.collection("cmds").deleteOne(myquery, function(err, obj) {
+    if (err) throw err;
+    console.log("dev deleted");
+    db.close();
+  });
 });
 */
 /*
@@ -34,6 +33,18 @@ MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   console.log("Database created!");
   db.close();
+});
+*/
+
+/*
+db.connect(err => {
+  if (err) throw err;
+  var dbo = db.db("commands");
+  dbo.collection("cmds").find({name : 'broken'}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result[0].text);
+    db.close();
+  });
 });
 */
 
@@ -55,11 +66,6 @@ bot.on('message', message => { //commands in alphabetical order
 		var cmdArray = addcmd.split(' ');
 		message.channel.send(cmdArray.length);
 
-		
-		for (var i = 0; i < cmdArray.length; i++) {
-			message.channel.send(addcmd[1] + " " + i);
-		}
-
 		if (cmdArray.length < 2) {
 
 			message.channel.send("Add a command by typing: !addcom [commandName] [Text]");
@@ -78,6 +84,14 @@ bot.on('message', message => { //commands in alphabetical order
 			db.connect(err => {
 				if (err) throw err;
 				var cmdsDB = db.db("commands");
+
+			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
+			    	if (err) throw err;
+			    	console.log(result[0].text);
+			    	db.close();
+				});
+
+
 			 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
 			  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
 				    if (err) throw err;
