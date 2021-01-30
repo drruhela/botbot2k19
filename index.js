@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-var mongo = require('mongodb');
+const mongo = require('mongodb').MongoClient;
+const url = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
+const mongoClient = new mongo(url, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const bot = new Discord.Client();
 //const TOKEN = process.env.BOT_TOKEN;
@@ -10,46 +12,30 @@ var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boo
 
 bot.login(TOKEN);
 
-//database name: commands
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
-const db = new MongoClient(uri, { useNewUrlParser: true });
-//collections: servers, cmds
+mongoClient.connect(err => {
+	try {
+		
+	}
 
-/*
-db.connect(err => {
-	if (err) throw err;
-  var dbo = db.db("commands");
-  var myquery = { name: 'broken' };
-  dbo.collection("cmds").deleteOne(myquery, function(err, obj) {
-    if (err) throw err;
-    console.log("dev deleted");
-    db.close();
-  });
+	finally {
+    	//mongoClient.close();
+  }
 });
-*/
-/*
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database created!");
-  db.close();
-});
-*/
 
-/*
-db.connect(err => {
-  if (err) throw err;
-  var dbo = db.db("commands");
-  dbo.collection("cmds").find({name : 'broken'}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
-    if (err) throw err;
-    console.log(result[0].text);
-    db.close();
-  });
-});
-*/
+bot.on('ready', async () => {
 
-bot.on('ready', () => {
 	console.info(`Logged in as ${bot.user.tag}!`);
+
+	await mongoClient.connect(err => {
+		try {
+			console.log("Connected to MongoDB!");
+		}
+
+		finally {
+	    	//mongoClient.close();
+	  }
+	});
+
 });
 
 
@@ -61,7 +47,6 @@ bot.on('message', message => { //commands in alphabetical order
 	if (messageLower.startsWith('!addcom')) {
 
 		var addcmd = message.content;
-		message.channel.send("message: " + addcmd);
 
 		var cmdArray = addcmd.split(' ');
 
@@ -72,79 +57,81 @@ bot.on('message', message => { //commands in alphabetical order
 		} else {
 			
 			var serverID = message.guild.id + "";
-			var cmdName = cmdArray[1];
+			var cmdName = cmdArray[1].toLowerCase();
 			var cmdBody = "";
 
 			for (var i = 2; i < cmdArray.length; i++) {
 				cmdBody += cmdArray[i] + " ";
 			}
 
-			
-			db.connect(err => {
-				if (err) throw err;
-				var cmdsDB = db.db("commands");
+			var cmdsDB = mongoClient.db("commands");
 
-				if (cmdsDB.collection("cmds").countDocuments({server : serverID, name: cmdName}) > 0) {
+
+			cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, results) {
+			    if (err) throw err;
+			    console.log(results);
+
+			    if (results.length == 0) {
+
+				    var newCommand = { server: serverID, name: cmdName, text: cmdBody };
+					cmdsDB.collection("cmds").insertOne(newCommand);
+					message.channel.send("The command " + cmdName + " has been added to your server!");
+					console.log("command doesn't exist, getting added");
+				
+				} else {
 					console.log("command already exists");
 			    	message.channel.send("That command already exists in this server. To edit it, use !edit.");
-				} else {
-					console.log("command doesn't exist");
-					
-					//make command
-					var newCommand = { server: serverID, name: cmdName, text: cmdBody };
-
-					message.channel.send("The command " + cmdName + " has been added to your server!");
-					cmdsDB.collection("cmds").insertOne(newCommand);
-					console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
-					
 				}
-				/*
-			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, result) {
-			    	//if (err) throw err;
 
-			    	var exists = false;
-
-			    	if (result.length > 0) {
-			    		
-			    		for (var i = 0; i <= result.length; i++) {
-			    			console.log(result);
-			    			if (result[i].name == cmdName) {
-			    				exists = true;
-			    			} 
-			    		}
-			    	}
-
-			    	if ( exists === true) {
-
-			    		console.log("command already exists");
-			    		message.channel.send("That command already exists in this server. To edit it, use !edit.");
-
-			    	} else {
-			    		console.log("command doesn't exist yet");
-
-			    		//comment this out
-					 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
-					  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
-							//if (err) throw err;
-						    console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
-						    db.close();
-					  	})
-
-			    	}
-
-			    	db.close();
-				});*/
-
-				db.close();
-			 	
-			});
-
-			
+		  	});
 
 		}
 
 	}
 	
+	else if (messageLower.startsWith('!delcom')) {
+
+		var delcmd = messageLower;
+
+		var cmdArray = delcmd.split(' ');
+
+		if (cmdArray.length < 2) {
+
+			message.channel.send("Delete a command by typing: !delcom [commandName]");
+
+		} else {
+
+			var serverID = message.guild.id + "";
+			var cmdName = cmdArray[1];
+
+			var cmdsDB = mongoClient.db("commands");
+
+
+			cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, results) {
+			    if (err) throw err;
+			    console.log(results);
+
+			    if (results.length == 0) {
+				    
+					message.channel.send("The command " + cmdName + " doesn't exist.");
+					console.log("command doesn't exist, can't get deleted.");
+				
+				} else {
+
+					var myquery = { server: serverID, name: cmdName };
+				  	cmdsDB.collection("cmds").deleteOne(myquery, function(err, obj) {
+					    if (err) throw err;
+						console.log("command exists, getting deleted.");
+				    	message.channel.send("The command " + cmdName + " has been successfully deleted.");
+				    });
+				}
+
+		  	});
+
+		}
+	}
+
+
 
 	if (messageLower === '!ale') {
 		message.channel.send('Pickle <:Pickle:699511064651497542>')
