@@ -126,7 +126,7 @@ bot.on('message', message => { //commands in alphabetical order
 	if (messageLower.startsWith('!addcom')) {
 
 		var addcmd = message.content;
-		message.channel.send(addcmd);
+		message.channel.send(addcmd + " " + addcmd.length);
 		addcmd.split(' ');
 
 		for (var i = 0; i < addcmd.length; i++) {
