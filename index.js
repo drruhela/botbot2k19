@@ -84,7 +84,18 @@ bot.on('message', message => { //commands in alphabetical order
 				if (err) throw err;
 				var cmdsDB = db.db("commands");
 
-			 	cmdsDB.collection("cmds").find({server : serverID}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
+				if (cmdsDB.collection("cmds").find({server : serverID, name: cmdName}).count() > 0) {
+					console.log("command already exists");
+			    	message.channel.send("That command already exists in this server. To edit it, use !edit.");
+				} else {
+					console.log("command doesn't exist");
+					
+					//make command
+					message.channel.send("The command " + cmdName + " has been added to your server!");
+
+				}
+				/*
+			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, result) {
 			    	//if (err) throw err;
 
 			    	var exists = false;
@@ -107,23 +118,24 @@ bot.on('message', message => { //commands in alphabetical order
 			    	} else {
 			    		console.log("command doesn't exist yet");
 
-			    		/*
+			    		//comment this out
 					 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
 					  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
 							//if (err) throw err;
 						    console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
 						    db.close();
-					  	});*/
+					  	})
 
 			    	}
 
 			    	db.close();
-				});
+				});*/
 
+				db.close();
 			 	
 			});
 
-			message.channel.send("The command " + cmdName + " has been added to your server!");
+			
 
 		}
 
