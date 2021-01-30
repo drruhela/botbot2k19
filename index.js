@@ -92,7 +92,7 @@ bot.on('message', message => { //commands in alphabetical order
 			    	if (result.length > 0) {
 			    		
 			    		for (var i = 0; i <= result.length; i++) {
-
+			    			console.log(result);
 			    			if (result[i].name == cmdName) {
 			    				exists = true;
 			    			} 
@@ -100,22 +100,27 @@ bot.on('message', message => { //commands in alphabetical order
 			    	}
 
 			    	if ( exists === true) {
+
 			    		console.log("command already exists");
 			    		message.channel.send("That command already exists in this server. To edit it, use !edit.");
+
 			    	} else {
 			    		console.log("command doesn't exist yet");
+
+			    		/*
+					 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
+					  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
+							//if (err) throw err;
+						    console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
+						    db.close();
+					  	});*/
+
 			    	}
 
 			    	db.close();
 				});
 
-			 	/*
-			 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
-			  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
-				    if (err) throw err;
-				    console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
-				    db.close();
-			  	});*/
+			 	
 			});
 
 			message.channel.send("The command " + cmdName + " has been added to your server!");
