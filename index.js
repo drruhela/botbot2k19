@@ -87,17 +87,17 @@ bot.on('message', message => { //commands in alphabetical order
 
 			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
 			    	if (err) throw err;
-			    	console.log(result[0].text);
+			    	console.log("checking if command already exists");
 			    	db.close();
 				});
 
-
+			 	/*
 			 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
 			  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
 				    if (err) throw err;
 				    console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
 				    db.close();
-			  	});
+			  	});*/
 			});
 
 			message.channel.send("The command " + cmdName + " has been added to your server!");
