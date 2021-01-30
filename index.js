@@ -42,7 +42,7 @@ bot.on('ready', async () => {
 bot.on('message', message => { //commands in alphabetical order
 
 	let messageLower = message.content.toLowerCase();
-	var serverID = message.guild.id() + "";
+	var serverID = message.guild.id + "";
 	var cmdsDB = mongoClient.db("commands");
 
 	if (messageLower.startsWith('!addcom')) {
@@ -299,11 +299,6 @@ bot.on('message', message => { //commands in alphabetical order
 	else { //read commands from database and deploy them
 
 		//if a commmand has been used from the db, display the appopriate message
-
-		var serverID = message.guild.id + "";
-
-		var cmdsDB = mongoClient.db("commands");
-
 
 		cmdsDB.collection("cmds").find({server : serverID, name : messageLower}).toArray(function(err, results) {
 			if (err) throw err;
