@@ -1,9 +1,7 @@
 const Discord = require('discord.js');
-//const csv = require('csv-parser');
 const fs = require('fs');
-//var json2csv = require('json2csv').parse;
-//const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const createCsvWriter = require("csv-writer").createObjectCsvWriter;
+var mongo = require('mongodb');
+
 const bot = new Discord.Client();
 //const TOKEN = process.env.BOT_TOKEN;
 const TOKEN = "Nzk0NzEyMjkwMTU4NzA2Njg5.X--zfw.5N8gNPDDJXLsHERFa6U81takVHI"
@@ -12,116 +10,44 @@ var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boo
 
 bot.login(TOKEN);
 
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
+const db = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+	console.log("Database Created!");
+	//const collection = client.db("Commands").collection("servers");
+	// perform actions on the collection object
+	db.close();
+});
+
+/*
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
+*/
+
 bot.on('ready', () => {
 	console.info(`Logged in as ${bot.user.tag}!`);
 });
-
-/*
-var newLine = '\r\n';
-
-var fields = ['Total', 'Name'];
-
-var appendThis = [
-  {
-    Total: '100',
-    Name: 'myName1',
-  },
-  {
-    Total: '200',
-    Name: 'myName2',
-  },
-];
-
-var toCsv = {
-  data: appendThis,
-  fields: fields,
-  header: false,
-};
-
-fs.stat('file.csv', function (err, stat) {
-  if (err == null) {
-    console.log('File exists');
-
-    //write the actual data and end with newline
-    var csv = json2csv(toCsv) + newLine;
-
-    fs.appendFile('file.csv', csv, function (err) {
-      if (err) throw err;
-      console.log('The "data to append" was appended to file!');
-    });
-  } else {
-    //write the headers and newline
-    console.log('New file, just writing headers');
-    fields = fields + newLine;
-
-    fs.writeFile('file.csv', fields, function (err) {
-      if (err) throw err;
-      console.log('file saved');
-    });
-  }
-});
-*/
-
-/* write into file with csvWriter
-when reading, convert from csv to array
-read from array
-make two methods(one that returns a boolean, one that returns the command's string)
-methods will check if command exists
-for addcom, return error if command exists
-*/
-
-/*
-const csvWriter = createCsvWriter({
-	append : true,
-  path: 'commands.csv',
-  header: [
-    {id: 'server', title: 'Server'},
-    {id: 'command', title: 'Command'},
-    {id: 'body', title: 'Body'},
-  ]
-});
-
-const data = [
-  {
-    server: 'devdev',
-    command: '!hello',
-    body: 'hi'
-  }
-];
-
-const data2 = [
-  {
-    server: 'devdev2',
-    command: '!hello2',
-    body: 'hi2'
-  }
-
-];
-
-
-csvWriter
-  .writeRecords(data)
-  .then(()=> console.log('The CSV file was written successfully'));
-
-csvWriter.writeRecords(data).then(()=> console.log('The CSV file was written successfully'));
-
-csvWriter.writeRecords(data2).then(()=> console.log('The CSV file was written successfully'));
-
-fs.createReadStream('data.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    console.log(row);
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed');
-});*/
 
 
 bot.on('message', message => { //commands in alphabetical order
 
 	let messageLower = message.content.toLowerCase();
 
-	
 
 	if (messageLower.startsWith('!addcom')) {
 
@@ -143,34 +69,12 @@ bot.on('message', message => { //commands in alphabetical order
 		} else {
 			
 			var server = message.guild.id + "";
-			var cmdFilePath = "commands/" + server + ".csv";
-
-			const csvWriter = createCsvWriter({
-				append : true,
-				path: cmdFilePath,
-				header: [
-			    {id: 'command', title: 'Command'},
-			    {id: 'body', title: 'Body'},
-			  ]
-			});
-
-
 			var cmdName = cmdArray[1];
 			var cmdBody = "";
 
 			for (var i = 2; i < cmdArray.length; i++) {
 				cmdBody += cmdArray[i] + " ";
 			}
-
-			const cmd = [{
-				command : cmdName,
-				body : cmdBody
-			}];
-
-
-			csvWriter.writeRecords(cmd).then(()=> console.log('The CSV file was written successfully'));
-
-			message.channel.send("Command " + cmdName + " has been added to your server!")
 
 			
 		}
