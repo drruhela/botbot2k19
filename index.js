@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const csv = require('csv-parser');
+//const csv = require('csv-parser');
 const fs = require('fs');
 //var json2csv = require('json2csv').parse;
 //const createCsvWriter = require('csv-writer').createObjectCsvWriter;
