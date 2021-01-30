@@ -16,9 +16,10 @@ const db = new MongoClient(uri, { useNewUrlParser: true });
 db.connect(err => {
 	var dbo = db.db("commands");
   	dbo.createCollection("servers", function(err, res) {
-    if (err) throw err;
-    console.log("Collection created!");
-	db.close();
+	    if (err) throw err;
+	    console.log("Collection created!");
+		db.close();
+	});
 });
 
 /*
