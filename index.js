@@ -14,25 +14,21 @@ bot.login(TOKEN);
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
 const db = new MongoClient(uri, { useNewUrlParser: true });
-//created collection: servers
+//collections: servers, cmds
 
+/*
 db.connect(err => {
 	var cmdDB = db.db("commands");
 	
-	cmdDB.collection("servers").drop(function(err, delOK) {
-	    if (err) throw err;
-	    if (delOK) console.log("Collection deleted");
-	    db.close();
-	});
-
 	cmdDB.createCollection("cmds", function(err, res) {
 	    if (err) throw err;
 	    console.log("Collection Cmds created!");
 	    db.close();
 	});
+
 	
 });
-
+*/
 /*
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
@@ -70,7 +66,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 			
-			var server = message.guild.id + "";
+			var serverID = message.guild.id + "";
 			var cmdName = cmdArray[1];
 			var cmdBody = "";
 
@@ -79,6 +75,19 @@ bot.on('message', message => { //commands in alphabetical order
 			}
 
 			
+			db.connect(err => {
+				if (err) throw err;
+				var cmdsDB = db.db("commands");
+			 	var newCommand = { server: serverID, name: cmdName, text: cmdBody };
+			  	cmdsDB.collection("cmds").insertOne(newCommand, function(err, res) {
+				    if (err) throw err;
+				    console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
+				    db.close();
+			  	});
+			});
+
+			message.channel.send("The command " + cmdName + " has been added to your server!");
+
 		}
 
 	}
