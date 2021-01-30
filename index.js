@@ -132,7 +132,7 @@ bot.on('message', message => { //commands in alphabetical order
 	}
 
 
-	if (messageLower.startsWith('!editcom')) {
+	else if (messageLower.startsWith('!editcom')) {
 
 		var editcmd = message.content;
 
@@ -182,14 +182,14 @@ bot.on('message', message => { //commands in alphabetical order
 
 		}
 
-	}	
+	}
 
 
 	if (messageLower === '!ale') {
 		message.channel.send('Pickle <:Pickle:699511064651497542>')
 	}
 
-	if (messageLower === 'alien' || messageLower === '!alien') {
+	else if (messageLower === 'alien' || messageLower === '!alien') {
 	  	
 	    message.channel.send('<a:alienpls:801563358997512232>');
 
@@ -286,5 +286,34 @@ bot.on('message', message => { //commands in alphabetical order
 	else if (messageLower === '!vinny') {
 		message.channel.send('<:botalert:802769299072614460> <:p_:763179797110849557>')
 	}
+
+
+	else { //read commands from database and deploy them
+
+		//if a commmand has been used from the db, display the appopriate message
+
+		var serverID = message.guild.id + "";
+
+		var cmdsDB = mongoClient.db("commands");
+
+
+		cmdsDB.collection("cmds").find({server : serverID, name : messageLower}).toArray(function(err, results) {
+			if (err) throw err;
+			console.log(results);
+
+			if (results.length != 0) {
+
+				var cmdText = results[0].text;
+
+				message.channel.send(cmdText);
+
+			    console.log("Command sent successfully");
+
+			}
+
+		});
+
+	}
+
 
 });
