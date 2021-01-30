@@ -84,15 +84,28 @@ bot.on('message', message => { //commands in alphabetical order
 				if (err) throw err;
 				var cmdsDB = db.db("commands");
 
-			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
+			 	cmdsDB.collection("cmds").find({server : serverID}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
 			    	//if (err) throw err;
+
+			    	var exists = false;
+
 			    	if (result.length > 0) {
-			    		console.log("command already exists");
+			    		
+			    		for (var i = 0; i <= result.length; i++) {
+
+			    			if (result[i].name == cmdName) {
+			    				exists = true;
+			    			} 
+			    		}
 			    	}
 
-			    	else {
+			    	if ( exists === true) {
+			    		console.log("command already exists");
+			    		message.channel.send("That command already exists in this server. To edit it, use !edit.");
+			    	} else {
 			    		console.log("command doesn't exist yet");
 			    	}
+
 			    	db.close();
 				});
 
