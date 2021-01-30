@@ -91,8 +91,12 @@ bot.on('message', message => { //commands in alphabetical order
 					console.log("command doesn't exist");
 					
 					//make command
-					message.channel.send("The command " + cmdName + " has been added to your server!");
+					var newCommand = { server: serverID, name: cmdName, text: cmdBody };
 
+					message.channel.send("The command " + cmdName + " has been added to your server!");
+					cmdsDB.collection("cmds").insertOne(newCommand);
+					console.log(cmdName + " added to commands database. Server: " + serverID + " Text: " + cmdBody);
+					
 				}
 				/*
 			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, result) {
