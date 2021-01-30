@@ -132,6 +132,58 @@ bot.on('message', message => { //commands in alphabetical order
 	}
 
 
+	if (messageLower.startsWith('!editcom')) {
+
+		var editcmd = message.content;
+
+		var cmdArray = editcmd.split(' ');
+
+		if (cmdArray.length <= 2) {
+
+			message.channel.send("Edit a command by typing: !editcom [commandName] [Text]");
+
+		} else {
+			
+			var serverID = message.guild.id + "";
+			var cmdName = cmdArray[1].toLowerCase();
+			var cmdBody = "";
+
+			for (var i = 2; i < cmdArray.length; i++) {
+				cmdBody += cmdArray[i] + " ";
+			}
+
+			var cmdsDB = mongoClient.db("commands");
+
+
+			cmdsDB.collection("cmds").find({server : serverID, name : cmdName}).toArray(function(err, results) {
+			    if (err) throw err;
+			    console.log(results);
+
+			    if (results.length == 0) {
+
+			    	console.log("command doesn't exist, can't edit it");
+			    	message.channel.send("There is no command by the name " + cmdName + ".");
+
+				    
+				
+				} else {
+
+					var myquery = { server: serverID, name: cmdName};
+					var newvalues = {$set: {text: cmdBody} };
+					cmdsDB.collection("cmds").updateOne(myquery, newvalues, function(err, res) {
+					 	if (err) throw err;
+					    message.channel.send("The command " + cmdName + " has been edited!");
+						console.log("command edited");
+					});
+
+				}
+
+		  	});
+
+		}
+
+	}	
+
 
 	if (messageLower === '!ale') {
 		message.channel.send('Pickle <:Pickle:699511064651497542>')
