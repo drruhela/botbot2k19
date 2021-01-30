@@ -126,12 +126,15 @@ bot.on('message', message => { //commands in alphabetical order
 	if (messageLower.startsWith('!addcom')) {
 
 		var addcmd = message.content;
-		message.channel.send(addcmd + " " + addcmd.length);
+		message.channel.send("message: " + addcmd);
 		addcmd.split(' ');
+		message.channel.send(addcmd.length);
 
+		/*
 		for (var i = 0; i < addcmd.length; i++) {
 			message.channel.send(addcmd[1] + i);
-		}
+		}*/
+
 		if (addcmd.length < 2) {
 
 			message.channel.send("Add a command by typing: !addcom [commandName] [Text]");
