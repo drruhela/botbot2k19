@@ -13,7 +13,7 @@ bot.login(TOKEN);
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
 const db = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
+db.connect(err => {
 	console.log("Database Created!");
 	//const collection = client.db("Commands").collection("servers");
 	// perform actions on the collection object
