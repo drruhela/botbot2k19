@@ -224,14 +224,30 @@ bot.on('message', message => { //commands in alphabetical order
 
 	else if (messageLower === '!cmds') {
 
-		var cmdsList = '';
-		var title = '__**List of commands for botbot2k19: **__';
+		var cmdsList = "";
+		var title = "__**List of commands for this server: **__";
 
-		for (var i = 0; i < cmds.length; i++) {
-			cmdsList += cmds[i] + '\n'
-		}
+		var cmdsDB = mongoClient.db("commands");
+
+
+		cmdsDB.collection("cmds").find({server : serverID}).toArray(function(err, results) {
+			if (err) throw err;
+			console.log(results);
+
+			if (results.length === 0) {
+				console.log("no commands in this server.")
+				cmdsList += "There are no commands in this server. To add commands, use !addcom."
+			} else {
+
+				for (var i = 0; i < results.length; i++) {
+					cmdsList += results[i].name + "          " + results[i].text + "\n";
+				}
+			}
+		});
+
 		message.channel.send(title);
-		message.channel.send('```'+ cmdsList + '```');
+		message.channel.send("```"+ cmdsList + "```");
+		console.log("Commands printed");
 	}
 
 	else if (messageLower === '!dev') {
@@ -299,7 +315,6 @@ bot.on('message', message => { //commands in alphabetical order
 
 		cmdsDB.collection("cmds").find({server : serverID, name : messageLower}).toArray(function(err, results) {
 			if (err) throw err;
-			console.log(results);
 
 			if (results.length != 0) {
 
