@@ -65,7 +65,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 		var cmdArray = addcmd.split(' ');
 
-		if (cmdArray.length < 2) {
+		if (cmdArray.length <= 2) {
 
 			message.channel.send("Add a command by typing: !addcom [commandName] [Text]");
 
