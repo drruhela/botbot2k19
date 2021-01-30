@@ -84,7 +84,7 @@ bot.on('message', message => { //commands in alphabetical order
 				if (err) throw err;
 				var cmdsDB = db.db("commands");
 
-				if (cmdsDB.collection("cmds").find({server : serverID, name: cmdName}).count() > 0) {
+				if (cmdsDB.collection("cmds").countDocuments({server : serverID, name: cmdName}) > 0) {
 					console.log("command already exists");
 			    	message.channel.send("That command already exists in this server. To edit it, use !edit.");
 				} else {
