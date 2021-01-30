@@ -228,10 +228,10 @@ bot.on('message', message => { //commands in alphabetical order
 
 			} else {
 
-				var padlength = 50;
+				var padlength = 40;
 
 				for (var i = 0; i < results.length; i++) {
-					cmdsList += results[i].name + results[i].text.padStart(padlength-results[i].name.length) + "\n";
+					cmdsList += results[i].name + ((padlength-results[i].name.length) * " ") + results[i].text + "\n";
 				}
 
 				message.channel.send(title);
