@@ -97,9 +97,9 @@ const data2 = [
   }
 
 ];
-*/
 
-/*csvWriter
+
+csvWriter
   .writeRecords(data)
   .then(()=> console.log('The CSV file was written successfully'));
 
@@ -121,7 +121,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 	let messageLower = message.content.toLowerCase();
 
-	/*
+	
 
 	if (messageLower.startsWith('!addcom')) {
 
@@ -171,7 +171,7 @@ bot.on('message', message => { //commands in alphabetical order
 		}
 
 	}
-	*/
+	
 
 	if (messageLower === '!ale') {
 		message.channel.send('Pickle <:Pickle:699511064651497542>')
