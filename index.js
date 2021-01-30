@@ -85,9 +85,13 @@ bot.on('message', message => { //commands in alphabetical order
 				var cmdsDB = db.db("commands");
 
 			 	cmdsDB.collection("cmds").find({server : serverID, name : cmdName}, { projection: { _id: 1, server: 1, name: 1, text: 1 } }).toArray(function(err, result) {
-			    	if (err) throw err;
+			    	//if (err) throw err;
 			    	if (result.length > 0) {
 			    		console.log("command already exists");
+			    	}
+
+			    	else {
+			    		console.log("command doesn't exist yet");
 			    	}
 			    	db.close();
 				});
