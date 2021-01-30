@@ -134,7 +134,7 @@ bot.on('message', message => { //commands in alphabetical order
 			message.channel.send("Add a command by typing: !addcom [commandName] [Text]");
 
 		} else {
-
+			/*
 			var server = message.guild.id + "";
 			var cmdFilePath = "commands/" + server + ".csv";
 
@@ -164,6 +164,8 @@ bot.on('message', message => { //commands in alphabetical order
 			csvWriter.writeRecords(cmd).then(()=> console.log('The CSV file was written successfully'));
 
 			message.channel.send("Command " + cmdName + " has been added to your server!")
+
+			*/
 		}
 
 	}
