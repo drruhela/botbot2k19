@@ -10,16 +10,23 @@ var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boo
 
 bot.login(TOKEN);
 
+//database name: commands
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
 const db = new MongoClient(uri, { useNewUrlParser: true });
+//created collection: servers
+
 db.connect(err => {
-	var dbo = db.db("commands");
-  	dbo.createCollection("servers", function(err, res) {
+	var cmdDB = db.db("commands");
+	cmdDB.servers.drop();
+	console.log("Servers collection deleted.");
+
+	cmdDB.createCollection("cmds", function(err, res) {
 	    if (err) throw err;
-	    console.log("Collection created!");
-		db.close();
+	    console.log("Collection Cmds created!");
+	    db.close();
 	});
+	
 });
 
 /*
