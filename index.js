@@ -1,14 +1,20 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const mongo = require('mongodb').MongoClient;
-const url = "mongodb+srv://botbot:rfB4tvuaMJxZal25@devcluster.wihi6.mongodb.net/commands?retryWrites=true&w=majority";
+
+
+const mongoUserVar = process.env.mongoUser;
+const mongoPassVar = process.env.mongoPass;
+const dbName = "commands";
+
+const url = "mongodb+srv://" + mongoUserVar + ":" + mongoPassVar + "@devcluster.wihi6.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
 const mongoClient = new mongo(url, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const bot = new Discord.Client();
 //const TOKEN = process.env.BOT_TOKEN;
-const TOKEN = "Nzk0NzEyMjkwMTU4NzA2Njg5.X--zfw.5N8gNPDDJXLsHERFa6U81takVHI"
+const TOKEN = "Nzk0NzEyMjkwMTU4NzA2Njg5.X--zfw.5N8gNPDDJXLsHERFa6U81takVHI";
 
-var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boogie, !boogie', '!broken', '!dev', 'kappa', '!leab']
+//var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boogie, !boogie', '!broken', '!dev', 'kappa', '!leab']
 
 bot.login(TOKEN);
 
@@ -263,7 +269,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 	}
 
-	
+
 	//animated emotes
 
 	else if (messageLower === 'blobtrain' || messageLower === '!blobtrain') {
