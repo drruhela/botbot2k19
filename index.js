@@ -29,23 +29,14 @@ mongoClient.connect(err => {
 });
 
 bot.on("guildCreate", guild => {
-   guild.owner.send('Thanks for the invite! You can use !help to find the commands.')
+   guild.owner.send('Thanks for the invite! You can use b!help to find the commands.')
 });
 
 bot.on('ready', async () => {
 
 	console.info(`Logged in as ${bot.user.tag}!`);
 
-	/*
-	bot.user.setPresence({
-        status: "online",  // You can show online, idle... Do not disturb is dnd
-        game: {
-            name: "!help",  // The message shown
-            type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
-        }
-    });*/
-
-    bot.user.setActivity("!help"); 
+    bot.user.setActivity("b!help"); 
 
 	await mongoClient.connect(err => {
 		try {
@@ -236,7 +227,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 	//help command
 
-	else if (messageLower === '!help') {
+	else if (messageLower === 'b!help') {
 
 		var title = "__**Help Commands**__";
 
