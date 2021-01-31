@@ -28,6 +28,10 @@ mongoClient.connect(err => {
   }
 });
 
+bot.on("guildCreate", guild => {
+   guild.owner.send('Thanks for the invite! You can use !help to find the commands.')
+});
+
 bot.on('ready', async () => {
 
 	console.info(`Logged in as ${bot.user.tag}!`);
@@ -226,12 +230,6 @@ bot.on('message', message => { //commands in alphabetical order
 		var title = "__**Help Commands**__";
 
 		var modCommands = [
-			{'!addcom' : 'To add a new command.' },
-			{'!editcom' : 'To edit an existing command.'},
-			{'!delcom' : 'To delete an existing command.'}
-		]
-
-		var modCommands = [
 			{
 				name : '!addcom',
 				text : 'To add a new command.'
@@ -243,6 +241,10 @@ bot.on('message', message => { //commands in alphabetical order
 			{
 				name : '!delcom',
 				text : 'To delete an existing command.'
+			},
+			{
+				name : '!cmds',
+				text : 'List of current commands.'
 			}
 		];
 
