@@ -83,7 +83,7 @@ bot.on('message', message => { //commands in alphabetical order
 				
 				} else {
 					console.log("command already exists");
-			    	message.channel.send("That command already exists in this server. To edit it, use !edit.");
+			    	message.channel.send("That command already exists in this server. To edit it, use !editcom.");
 				}
 
 		  	});
