@@ -36,6 +36,13 @@ bot.on('ready', async () => {
 
 	console.info(`Logged in as ${bot.user.tag}!`);
 
+	bot.user.setStatus('available')
+    bot.user.setPresence({
+        game: {
+            name: '!help'
+        }
+    });
+
 	await mongoClient.connect(err => {
 		try {
 			console.log("Connected to MongoDB!");
