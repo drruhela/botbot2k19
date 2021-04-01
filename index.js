@@ -300,8 +300,23 @@ bot.on('message', message => { //commands in alphabetical order
 
 				var cmdText = results[0].text;
 
-				message.channel.send(cmdText);
+				if(cmdText.startsWith("/tts ")) {
+					var cmdArray = cmdText.split(' ');
+					var ttsText = "";
 
+					for (var i = 2; i < cmdArray.length; i++) {
+						ttsText += cmdArray[i] + " ";
+					}
+
+					message.channel.send(ttsText, {
+						tts: true
+					});
+				}
+				
+				else {
+					message.channel.send(cmdText);
+				}
+				
 			    console.log("Command sent successfully");
 
 			}
