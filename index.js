@@ -303,7 +303,7 @@ bot.on('message', message => { //commands in alphabetical order
 		} else {
 			
 			var qEnds = addq.indexOf('?');
-			var question = addq.substring(0,qEnds+1);
+			var question = addq.substring(5,qEnds+1);
 			var answer = addq.substring(qEnds+1);
 
 			cmdsDB.collection("questions").find({server : serverID, name : question}).toArray(function(err, results) {
@@ -332,15 +332,15 @@ bot.on('message', message => { //commands in alphabetical order
 
 		var editq = message.content;
 
-		if (eqitq.length <= 6 || eqitq.indexOf('?') == -1) {
+		if (editq.length <= 6 || editq.indexOf('?') == -1) {
 
 			message.channel.send("Edit a question by typing: -eq [question?] [answer]");
 
 		} else {
 			
-			var qEnds = eqitq.indexOf('?');
-			var question = eqitq.substring(0,qEnds+1);
-			var answer = eqitq.substring(qEnds+1);
+			var qEnds = editq.indexOf('?');
+			var question = editq.substring(5,qEnds+1);
+			var answer = editq.substring(qEnds+1);
 
 			cmdsDB.collection("questions").find({server : serverID, name : cmdName}).toArray(function(err, results) {
 			    if (err) throw err;
@@ -379,7 +379,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 
-			var question = eqitq.substring(4);
+			var question = deleteq.substring(5);
 
 			cmdsDB.collection("questions").find({server : serverID, name : question}).toArray(function(err, results) {
 			    if (err) throw err;
