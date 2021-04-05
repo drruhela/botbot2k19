@@ -503,6 +503,40 @@ bot.on('message', message => { //commands in alphabetical order
 
 		});
 
+		cmdsDB.collection("questions").find({server : serverID, name : messageLower}).toArray(function(err, results) {
+			if (err) throw err;
+
+			if (results.length != 0) {
+
+				var cmdText = results[0].text;
+
+				if(cmdText.startsWith("/tts ") && cmdText.length >= 5) {
+					/*var cmdArray = cmdText.split(' ');
+					var ttsText = "";
+
+					for (var i = 2; i < cmdArray.length; i++) {
+						ttsText += cmdArray[i] + " ";
+					}
+
+					message.channel.send(ttsText, {
+						tts: true
+					});*/
+					
+					var ttsText = cmdText.substring(5);
+					message.channel.send(ttsText, { tts: true });
+
+				}
+				
+				else {
+					message.channel.send(cmdText);
+				}
+
+			    console.log("Command sent successfully");
+
+			}
+
+		});
+
 	}
 
 
