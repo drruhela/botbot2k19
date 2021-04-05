@@ -443,7 +443,7 @@ bot.on('message', message => { //commands in alphabetical order
 			}
 		});
 
-
+		/*
 		const exampleEmbed = new Discord.MessageEmbed()
 			.setColor('#0099ff')
 			.setTitle('Questions')
@@ -460,7 +460,7 @@ bot.on('message', message => { //commands in alphabetical order
 			.setTimestamp()
 			.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
-		channel.send(exampleEmbed);
+		channel.send(exampleEmbed);*/
 
 	}
 
