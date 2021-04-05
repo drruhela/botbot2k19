@@ -189,6 +189,9 @@ bot.on('message', message => { //commands in alphabetical order
 
 		var cmdsList = "";
 		var title = "__**List of commands for this server: **__";
+		
+		var divisions = [];
+		var divisionLength = 0;
 
 		cmdsDB.collection("cmds").find({server : serverID}).toArray(function(err, results) {
 			if (err) throw err;
@@ -213,11 +216,28 @@ bot.on('message', message => { //commands in alphabetical order
 					}
 
 					var cmdCount = (i + 1) + ". ";
-					cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
+
+					divisionLength += cmdCount.length + results[i].name.length + pad.length + results[i].text.length;
+
+					if (divisionLength < 2000) {
+
+						cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
+
+					} else {
+						divisions.push(cmdsList);
+						cmdsList = "";
+						divisionLength = 0;
+					}
+					
 				}
 
 				message.channel.send(title);
-				message.channel.send("```"+ cmdsList + "```");
+
+				for (var i = 0; i < divisions.length; i++) {
+					message.channel.send("```"+ divisions[i] + "```");
+				}
+
+				//message.channel.send("```"+ cmdsList + "```");
 				console.log("Commands printed");
 
 			}
