@@ -219,7 +219,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 					divisionLength += cmdCount.length + results[i].name.length + pad.length + results[i].text.length;
 
-					if (divisionLength < 2000) {
+					if (divisionLength < 1800) {
 
 						cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
 
@@ -459,7 +459,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 					divisionLength += cmdCount.length + results[i].name.length + pad.length + results[i].text.length;
 
-					if (divisionLength < 2000) {
+					if (divisionLength <= 1800) {
 
 						cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
 
