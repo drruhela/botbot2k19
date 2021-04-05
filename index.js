@@ -387,12 +387,12 @@ bot.on('message', message => { //commands in alphabetical order
 
 			    if (results.length == 0) {
 				    
-					message.channel.send("The question " + cmdName + " couldn't be found.");
+					message.channel.send("The question " + question + " couldn't be found.");
 					console.log("question doesn't exist, can't get deleted.");
 				
 				} else {
 
-					var myquery = { server: serverID, name: cmdName };
+					var myquery = { server: serverID, name: question };
 				  	cmdsDB.collection("questions").deleteOne(myquery, function(err, obj) {
 					    if (err) throw err;
 						console.log("question exists, getting deleted.");
