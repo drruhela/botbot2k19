@@ -289,6 +289,182 @@ bot.on('message', message => { //commands in alphabetical order
 		}
 	}
 
+	//naruto answers
+	else if (messageLower.startsWith('-aq')) {
+
+		var addq = message.content;
+
+		//var qArray = addcmd.split(' ');
+
+		if (cmdArray.length <= 6 || addq.indexOf('?') == -1) {
+
+			message.channel.send("Add a question by typing: -aq [question?] [answer]");
+
+		} else {
+			
+			var qEnds = addq.indexOf('?');
+			var question = addq.substring(0,qEnds+1);
+			var answer = addq.substring(qEnds+1);
+
+			cmdsDB.collection("questions").find({server : serverID, name : question}).toArray(function(err, results) {
+			    if (err) throw err;
+			    console.log(results);
+
+			    if (results.length == 0) {
+
+				    var newCommand = { server: serverID, name: question, text: answer };
+					cmdsDB.collection("questions").insertOne(newCommand);
+					message.channel.send("The question " + question + " has been added to your server!");
+					console.log("question doesn't exist, getting added");
+				
+				} else {
+					console.log("question already exists");
+			    	message.channel.send("That question has already been added. To edit it, use -eq.");
+				}
+
+		  	});
+
+		}
+
+	}
+
+	else if (messageLower.startsWith('-eq')) {
+
+		var editq = message.content;
+
+		if (eqitq.length <= 6 || eqitq.indexOf('?') == -1) {
+
+			message.channel.send("Edit a question by typing: -eq [question?] [answer]");
+
+		} else {
+			
+			var qEnds = eqitq.indexOf('?');
+			var question = eqitq.substring(0,qEnds+1);
+			var answer = eqitq.substring(qEnds+1);
+
+			cmdsDB.collection("questions").find({server : serverID, name : cmdName}).toArray(function(err, results) {
+			    if (err) throw err;
+			    console.log(results);
+
+			    if (results.length == 0) {
+
+			    	console.log("question doesn't exist, can't edit it");
+			    	message.channel.send("The question " + question + " couldn't be found.");
+				
+				} else {
+
+					var myquery = { server: serverID, name: question};
+					var newvalues = {$set: {text: answer} };
+					cmdsDB.collection("questions").updateOne(myquery, newvalues, function(err, res) {
+					 	if (err) throw err;
+					    message.channel.send("The question " + question + " has been edited!");
+						console.log("question edited");
+					});
+
+				}
+
+		  	});
+
+		}
+
+	}
+
+	else if (messageLower.startsWith('-dq')) {
+
+		var deleteq = messageLower;
+
+		if (deleteq.length <= 5) {
+
+			message.channel.send("Delete a question by typing: -dq [question?]");
+
+		} else {
+
+			var question = eqitq.substring(4);
+
+			cmdsDB.collection("questions").find({server : serverID, name : question}).toArray(function(err, results) {
+			    if (err) throw err;
+			    console.log(results);
+
+			    if (results.length == 0) {
+				    
+					message.channel.send("The question " + cmdName + " couldn't be found.");
+					console.log("question doesn't exist, can't get deleted.");
+				
+				} else {
+
+					var myquery = { server: serverID, name: cmdName };
+				  	cmdsDB.collection("cmds").deleteOne(myquery, function(err, obj) {
+					    if (err) throw err;
+						console.log("question exists, getting deleted.");
+				    	message.channel.send("The question " + question + " has been successfully deleted.");
+				    });
+				}
+
+		  	});
+
+		}
+	}
+
+	else if (messageLower === '-questions') {
+
+		var cmdsList = "";
+		var title = "__**Questions:**__";
+
+		cmdsDB.collection("questions").find({server : serverID}).toArray(function(err, results) {
+			if (err) throw err;
+			//console.log(results);
+
+			if (results.length === 0) {
+				
+				message.channel.send("There are no questions in this server. To add questions, use -aq.")
+				console.log("no questions in this server.")
+				//cmdsList += "There are no commands in this server. To add commands, use !addcom."
+
+			} else {
+
+				var padlength = 20;
+
+				for (var i = 0; i < results.length; i++) {
+
+					var pad = "";
+
+					for (var j = padlength; j > results[i].name.length; j--) {
+						pad += " ";
+					}
+
+					var cmdCount = (i + 1) + ". ";
+					cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
+				}
+
+				message.channel.send(title);
+				message.channel.send("```"+ cmdsList + "```");
+				console.log("Questions printed");
+
+			}
+		});
+
+
+		const exampleEmbed = new Discord.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('Questions')
+			.setDescription('Questions and Answers')
+			.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+			.addFields(
+				{ name: 'Regular field title', value: 'Some value here' },
+				{ name: '\u200B', value: '\u200B' },
+				{ name: 'Inline field title', value: 'Some value here', inline: true },
+				{ name: 'Inline field title', value: 'Some value here', inline: true },
+			)
+			.addField('Inline field title', 'Some value here', true)
+			.setImage('https://i.imgur.com/wSTFkRM.png')
+			.setTimestamp()
+			.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+
+		channel.send(exampleEmbed);
+
+	}
+
+
 	else { //read commands from database and deploy them
 
 		//if a commmand has been used from the db, display the appopriate message
