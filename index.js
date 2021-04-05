@@ -296,7 +296,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 		//var qArray = addcmd.split(' ');
 
-		if (cmdArray.length <= 6 || addq.indexOf('?') == -1) {
+		if (addq.length <= 6 || addq.indexOf('?') == -1) {
 
 			message.channel.send("Add a question by typing: -aq [question?] [answer]");
 
