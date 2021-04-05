@@ -302,8 +302,8 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 			
-			var qEnds = addq.indexOf('?');
-			var question = addq.substring(4,qEnds+1);
+			var qEnds = messageLower.indexOf('?');
+			var question = messageLower.substring(4,qEnds+1);
 			var answer = addq.substring(qEnds+1);
 
 			cmdsDB.collection("questions").find({server : serverID, name : question}).toArray(function(err, results) {
@@ -338,8 +338,8 @@ bot.on('message', message => { //commands in alphabetical order
 
 		} else {
 			
-			var qEnds = editq.indexOf('?');
-			var question = editq.substring(4,qEnds+1);
+			var qEnds = messageLower.indexOf('?');
+			var question = messageLower.substring(4,qEnds+1);
 			var answer = editq.substring(qEnds+1);
 
 			cmdsDB.collection("questions").find({server : serverID, name : cmdName}).toArray(function(err, results) {
