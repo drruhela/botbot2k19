@@ -362,7 +362,7 @@ bot.on('message', message => { //commands in alphabetical order
 			var question = messageLower.substring(4,qEnds+1);
 			var answer = editq.substring(qEnds+1);
 
-			cmdsDB.collection("questions").find({server : serverID, name : cmdName}).toArray(function(err, results) {
+			cmdsDB.collection("questions").find({server : serverID, name : question}).toArray(function(err, results) {
 			    if (err) throw err;
 			    console.log(results);
 
