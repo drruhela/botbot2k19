@@ -393,7 +393,7 @@ bot.on('message', message => { //commands in alphabetical order
 				} else {
 
 					var myquery = { server: serverID, name: cmdName };
-				  	cmdsDB.collection("cmds").deleteOne(myquery, function(err, obj) {
+				  	cmdsDB.collection("questions").deleteOne(myquery, function(err, obj) {
 					    if (err) throw err;
 						console.log("question exists, getting deleted.");
 				    	message.channel.send("The question " + question + " has been successfully deleted.");
