@@ -504,6 +504,21 @@ bot.on('message', message => { //commands in alphabetical order
 
 	}
 
+	//vanish command - deletes last message sent by user that does !vanish
+	else if (messageLower === '!vanish') {
+		var author = message.author();
+		message.channel.messages.fetch({ limit: 5 }).then(messages => {
+			let lastMessage = messages.first();
+			
+			console.log(lastMessage.content);
+			if (lastMessage.author === author) {
+				//message.delete()
+				//.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+				//.catch(console.error);
+			}
+		})
+		.catch(console.error);
+	}
 
 	else { //read commands from database and deploy them
 
