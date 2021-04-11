@@ -515,11 +515,17 @@ bot.on('message', message => { //commands in alphabetical order
 		})
 		.catch(console.error);
 
-		message.channel.messages.fetch({ limit : 1, author : mAuthor}).then(messages => {
+		message.channel.messages.fetch({ limit : 1}).then(messages => {
 			let lastMessage = messages.first();
-			console.log(lastMessage.content);
-			lastMessage.delete();
-			console.log("last message deleted.")
+			
+			if(lastMessage.author === mAuthor) {
+				console.log(lastMessage.content);
+				lastMessage.delete();
+				console.log("last message deleted.")
+			} else {
+				console.log("Last message was not sent by same author.")
+			}
+
 		})
 		.catch(console.error);
 	}
