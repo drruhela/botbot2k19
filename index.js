@@ -508,9 +508,18 @@ bot.on('message', message => { //commands in alphabetical order
 	else if (messageLower === '!vanish') {
 		var mAuthor = message.author;
 		message.channel.messages.fetch({ limit: 1 }).then(messages => {
-			let vanishMessage = messages[2];
+			let vanishMessage = messages.first();
 			console.log(vanishMessage.content);
+			vanishMessage.delete();
+			console.log("!vanish deleted.")
+		})
+		.catch(console.error);
 
+		message.channel.messages.fetch({ limit : 1, author : mAuthor}).then(messages => {
+			let lastMessage = messages.first();
+			console.log(lastMessage.content);
+			lastMessage.delete();
+			console.log("last message deleted.")
 		})
 		.catch(console.error);
 	}
