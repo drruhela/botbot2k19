@@ -507,15 +507,18 @@ bot.on('message', message => { //commands in alphabetical order
 	//vanish command - deletes last message sent by user that does !vanish
 	else if (messageLower === '!vanish') {
 		var mAuthor = message.author;
-		message.channel.messages.fetch({ limit: 1 }).then(messages => {
-			let vanishMessage = messages.first();
-			console.log(vanishMessage.content);
-			vanishMessage.delete();
-			console.log("!vanish deleted.")
-				
-		})
-		.catch(console.error);
 		
+		for (var i = 0; i < 2; i++) {
+			message.channel.messages.fetch({ limit: 1 }).then(messages => {
+				let vanishMessage = messages.first();
+				console.log(vanishMessage.content);
+				vanishMessage.delete();
+				console.log("!vanish deleted.")
+					
+			})
+			.catch(console.error);
+		}
+
 		/*
 		message.channel.messages.fetch({ limit : 1}).then(messages => {
 			let lastMessage = messages.first();
