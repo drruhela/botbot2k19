@@ -506,7 +506,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 	//vanish command - deletes last message sent by user that does !vanish
 	else if (messageLower === '!vanish') {
-		var author = message.author();
+		var author = message.author;
 		message.channel.messages.fetch({ limit: 5 }).then(messages => {
 			let lastMessage = messages.first();
 			
