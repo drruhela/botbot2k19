@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const fs = require('fs');
-const ws = fs.createWriteStream("./commands/commands.csv");
+//const fs = require('fs');
+//const ws = fs.createWriteStream("./commands/commands.csv");
 const mongo = require('mongodb').MongoClient;
 
 
