@@ -195,7 +195,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 		cmdsDB.collection("cmds").find({server : serverID}).toArray(function(err, results) {
 			if (err) throw err;
-			//console.log(results);
+			console.log(results.length + "commands");
 
 			if (results.length === 0) {
 				
@@ -219,7 +219,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 					divisionLength += cmdCount.length + results[i].name.length + pad.length + results[i].text.length;
 
-					if (divisionLength <= 1500) {
+					if (divisionLength <= 1800) {
 
 						cmdsList += cmdCount + results[i].name + pad + results[i].text + "\n";
 
