@@ -198,6 +198,7 @@ bot.on('message', message => { //commands in alphabetical order
 		cmdsDB.collection("cmds").find({server : serverID}).toArray(function(err, results) {
 			if (err) throw err;
 
+			/*
 			console.log(results);
         	fastcsv
 				.write(results, { headers: true })
@@ -205,7 +206,7 @@ bot.on('message', message => { //commands in alphabetical order
 				console.log("Write to commands.csv successfully!");
 				})
 				.pipe(ws);
-
+			*/
 			console.log(results.length + "commands");
 
 			if (results.length === 0) {
@@ -216,7 +217,7 @@ bot.on('message', message => { //commands in alphabetical order
 
 			} else {
 
-				/*
+				
 				var padlength = 30;
 
 				for (var i = 0; i < results.length; i++) {
@@ -251,10 +252,10 @@ bot.on('message', message => { //commands in alphabetical order
 
 				//message.channel.send("```"+ cmdsList + "```");
 				console.log("Commands printed");
-				*/
+				
 
-				message.channel.send(new Discord.MessageAttachment('./commands/commands.csv', 'commands.csv'));
-				console.log('commands.csv file sent');
+				//message.channel.send(new Discord.MessageAttachment('./commands/commands.csv', 'commands.csv'));
+				//console.log('commands.csv file sent');
 			}
 		});
 
