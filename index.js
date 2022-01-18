@@ -6,6 +6,7 @@ const mongo = require('mongodb').MongoClient;
 
 const mongoUserVar = process.env.mongoUser;
 const mongoPassVar = process.env.mongoPass;
+const TOKEN = process.env.discToken;
 const dbName = "commands";
 
 const url = "mongodb+srv://" + mongoUserVar + ":" + mongoPassVar + "@devcluster.wihi6.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
@@ -13,7 +14,6 @@ const mongoClient = new mongo(url, { useUnifiedTopology: true, useNewUrlParser: 
 
 const bot = new Discord.Client();
 //const TOKEN = process.env.BOT_TOKEN;
-const TOKEN = "Nzk0NzEyMjkwMTU4NzA2Njg5.X--zfw.5N8gNPDDJXLsHERFa6U81takVHI";
 
 //var cmds = ['alien, !alien', 'awk', 'blob, !blob', 'blobtrain, !blobtrain', 'boogie, !boogie', '!broken', '!dev', 'kappa', '!leab']
 
